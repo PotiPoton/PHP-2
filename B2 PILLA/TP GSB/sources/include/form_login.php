@@ -2,35 +2,29 @@
     session_start();
     require_once './class/Employee.php';
     require_once './function/Functions.php';
+    require_once 'error-handling.php'; 
 
     $oVisitors = new C_Visitors();
     $oAccountants = new C_Accountants();
 
     if(isset($_POST["connect"])){
+        $inputLogin = htmlspecialchars($_POST["inputLogin"]);
+        $inputPwd = htmlspecialchars($_POST["inputPwd"]);
 
-        if(!empty($_POST["inputLogin"]) && !empty($_POST["inputPwd"])){
-            $inputLogin = htmlspecialchars($_POST["inputLogin"]);
-            $inputPwd = htmlspecialchars($_POST["inputPwd"]);
+        $logged = $oVisitors->CheckLoginInfo($inputLogin, $inputPwd);
 
+        /*if(!empty($_POST["inputLogin"]) && !empty($_POST["inputPwd"])){
+
+
+            
             $logged = $oAccountants->CheckLoginInfo($inputLogin, $inputPwd);
             if (gettype($logged) === 'object') $successMsg = "Identifiants correctes, mais Comptable";
             else if ($logged === 'pwd') $errorMsg = "Mot de passe incorrect COMPTABLE";
-            else {
-                $logged = $oVisitors->CheckLoginInfo($inputLogin, $inputPwd);
-                if (gettype($logged) === 'object'){
-                    SetAllMessageToNull(); 
-                    $_SESSION['visitor'] = $logged; 
-                    header('Location: home.php');
-                    exit;
-                }
-                else if ($logged == 'pwd') $errorMsg = "Mot de passe incorrect";
-                else if ($logged == 'lgn') $errorMsg = "Login incorrect";  
-            }
         }
-        else $errorMsg = "Il manque au moins une information";
+        else $errorMsg = "Il manque au moins une information";*/
     }
 
-    require_once 'error-handling.php'; 
+    
 
 ?>
 <div class="cnt center">

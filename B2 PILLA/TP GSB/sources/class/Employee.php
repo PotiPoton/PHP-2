@@ -1,6 +1,7 @@
 <?php
 
 require_once 'Cdao.php';
+require_once './function/Functions.php';
 
 /*---------------------------------------------------------------------*/
 #                                                                       #
@@ -152,15 +153,22 @@ class C_Visitors{
     }
 
     public function CheckLoginInfo($sLogin, $sPwd){
+        if(empty($sLogin) || empty($sPwd)) { $errorMsg = "Il manque au moins une information"; return; } //Une des deux valeur vide
+
         $salt = $this->GetSaltByLogin($sLogin);
-        if(empty($salt)) return 'lgn'; //login faux
+        if(empty($salt)) { $errorMsg = "Login incorrect"; return; } //login faux
 
         $hashPwd = hash('sha512', $sPwd.$salt);
         foreach($this->tabVisitors as $visitor){
             $isTrue = ($visitor->Login() == $sLogin && $visitor->HashMdp() == $hashPwd);
-            if ($isTrue) return $visitor; //OK
+            if ($isTrue){
+                SetAllMessageToNull(); 
+                $_SESSION['visitor'] = $logged; 
+                header('Location: home.php');
+                return;
+            }; //OK
         }
-        return 'pwd';//Mot de passe faux
+        $errorMsg = "Mot de passe incorrect"; return;//Mot de passe faux
     }
             
     public function GetRowTabVisitor($sSortType = null, $sAscDesc = 'asc'){
@@ -205,6 +213,10 @@ class C_Visitors{
 
     #endregion
 }
+
+$test = new C_Visitors();
+$test->CheckLoginInfo("", "fhdughfgdg");
+
 
 #endregion
 
