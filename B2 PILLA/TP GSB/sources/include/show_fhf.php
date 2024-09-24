@@ -1,6 +1,6 @@
 <div class="cnt table">
     <h2>Récapitulatif des frais hors forfait</h2>
-    <h4>Mois : <?php echo "insérer var" ?></h4>
+    <h4>Mois : <?php echo $monthFr[date('F')]; ?></h4>
     <?php
 
     $rows = $oLignesFraisHorsForfait->GetRowsLignesFraisHorsForfait();
