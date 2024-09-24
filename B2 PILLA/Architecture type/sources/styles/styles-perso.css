@@ -18,7 +18,8 @@ form {
     overflow: auto;
     box-sizing: border-box; }
 input[type="submit"]{
-    width: 100%;
+    width: 70%;
+    display: block;
     min-width: fit-content;
     text-align: center;
     font-weight: 600;
@@ -35,6 +36,9 @@ table {
 thead, tbody, th { background-color: #003b57; }
 tr { background-color: #042c3f; }
 tr:nth-child(even) { background-color: #303030; }
+tr:hover {
+    background: #525252;
+}
 td, th { 
     margin: 0px; 
     padding: 10px; 
