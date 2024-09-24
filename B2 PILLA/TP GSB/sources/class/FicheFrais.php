@@ -265,22 +265,21 @@ class C_LigneFraisHorsForfait{
 class C_LignesFraisHorsForfait{
     protected $tabLignesFraisHorsForfait;
 
-    public function __construct(){
+    public function __construct($sVisitor){
 
         try{
             $odao = new Cdao();
-            $query = "SELECT * FROM lignefraishorsforfait;";
+            $query = "SELECT * FROM lignefraishorsforfait WHERE idVisiteur='".$sVisitor->Id()."';";
             $tempTabLignesFraisHorsForfait = $odao->getTabDataFromSql($query);
 
             //TODO if (empty($tempTabLignesFraisHorsForfait)){ $this->tabLignesFraisHorsForfait[]; return; }
 
-            $oVisitors = new C_Visitors();
             $oEtats = new C_Etats();
 
             foreach ($tempTabLignesFraisHorsForfait as $ligneFraisHorsForfait) {
                 $this->tabLignesFraisHorsForfait[] = new C_FicheFrais(
                     $ligneFraisHorsForfait['id'],
-                    $oVisitors->GetVisitorById($ligneFraisHorsForfait['idVisiteur']),
+                    $sVisitor,
                     $ligneFraisHorsForfait['mois'],
                     $ligneFraisHorsForfait['libelle'],
                     $ligneFraisHorsForfait['date'],

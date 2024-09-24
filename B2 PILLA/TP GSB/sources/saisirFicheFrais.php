@@ -10,7 +10,7 @@
     $oVisitor = $_SESSION['visitor'];
     CheckIfLogged($oVisitor);
 
-    $oLignesFraisHorsForfait = new C_LignesFraisHorsForfait();
+    $oLignesFraisHorsForfait = new C_LignesFraisHorsForfait($oVisitor);
     
 
     /*$oFichesFrais = new C_FichesFrais();
