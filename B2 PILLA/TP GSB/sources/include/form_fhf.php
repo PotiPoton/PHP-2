@@ -1,5 +1,13 @@
 <?php
+    if(isset($_POST['bnt-fhf'])){
+        if(isset($_POST['lib-fhf']) && isset($_POST['mnt-fhf'])){
+            $inputLibFhf = htmlspecialchars($_POST['lib-fhf']);
+            $inputMntFhf = htmlspecialchars($_POST['mnt-fhf']);
 
+            
+        }
+        else $errorMsg = "Il manque au moins une information";
+    }
 ?>
 
 <div class="cnt form">
