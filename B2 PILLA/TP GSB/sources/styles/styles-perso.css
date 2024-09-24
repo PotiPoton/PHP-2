@@ -17,33 +17,19 @@ form {
     max-height: 80vh;
     overflow: auto;
     box-sizing: border-box; }
-input[type="submit"]{
-    width: 70%;
-    display: block;
-    min-width: fit-content;
-    text-align: center;
-    font-weight: 600;
-    border-radius: 12px;
-    border-style: none;
-    margin: 20px auto 0 auto;
-    padding: 6px 3px;
-    color: #fff; }
+input {display: block; width: 80%; min-width: fit-content; margin: 7px auto; padding: 2px 15px; 
+    border-radius: 10px; border-style: none; border: none; background: #f4f4f4;}
+input[type="submit"]{ padding: 6px 3px; font-weight: 600; color: #fff; }
 
-table { 
-    margin: 0 auto 10px auto;
-    width: 100%;
-    border-collapse: collapse; } 
-thead, tbody, th { background-color: #003b57; }
-tr { background-color: #042c3f; }
-tr:nth-child(even) { background-color: #303030; }
-tr:hover {
-    background: #525252;
-}
-td, th { 
-    margin: 0px; 
-    padding: 10px; 
-    vertical-align: top; 
-    border: 1px solid #ccc;
+table { margin: 4px auto; width: 100%; border-collapse: collapse; } 
+thead, tbody, th { background: #003b57; }
+tr { background: #042c3f; }
+tr:nth-child(even) { background: #303030; }
+th:hover, tr:hover { background: #525252; }
+td, th { padding: 10px; vertical-align: top; border: 10px solid #ccc;
+    
+    
+    
     border-style: hidden; } 
 
 /** Titres */
@@ -69,12 +55,10 @@ h4 {
 /** Liens */
 a{
     text-decoration: none;
-    color: #c4c4c4;
-}
+    color: #c4c4c4; }
 a:hover{
     text-decoration: none;
-    color: #ffffff;
-}
+    color: #ffffff; }
 
 /** Navbar */
 #navbar {
@@ -117,13 +101,7 @@ a:hover{
 .cnt.form.large { width: 600px; }
 .cnt.form.extra-large { width: 850px; }
 .cnt.form.nomgn { margin: 0; }
-.cnt.form > form > input {
-    border: none;
-    width: 100%;
-    background: #f4f4f4;
-    margin-bottom: 4px; }
 .cnt.form > form > input[type="submit"] {
-    width: 100%;
     min-width: fit-content;
     text-align: center;
     font-weight: 600;
@@ -137,11 +115,11 @@ a:hover{
 /** tables */
 .cnt.table { 
     box-shadow: 0 0 8px #000;
-    background: #303030; }
+    background: #303030; 
+    padding-bottom: 3px }
 .cnt.table > h4 {
     margin: 16px 0;
-    padding: 0 16px 0 16px;
-}
+    padding: 0 16px 0 16px; }
 
 /** Centrer sur toute la page */
 .cnt.center {
@@ -175,3 +153,4 @@ a:hover{
     margin: 5px;
     color: red; }
 .success{ color:green; }
+
