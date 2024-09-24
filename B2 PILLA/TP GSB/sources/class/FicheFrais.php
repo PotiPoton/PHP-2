@@ -1,7 +1,7 @@
 <?php 
 
 require_once 'Cdao.php';
-require_once 'Visitor.php';
+require_once 'Employee.php';
 
 /*---------------------------------------------------------------------*/
 #                                                                       #
@@ -32,7 +32,7 @@ class C_Etats {
             $query = "SELECT * FROM etat;";
             $tempTabEtat = $odao->getTabDataFromSql($query);
 
-            if (empty($tempTabLignesFraisForfait)) return null;
+            //TODO if (empty($tempTabEtat)) { $this->tabEtats[]; return; }
 
             foreach ($tempTabEtat as $etat) {
                 $this->tabEtats[] = new C_Etat(
@@ -87,10 +87,10 @@ class C_FraisForfaits {
             $query = "SELECT * FROM fraisforfait;";
             $tempTabFraisForfaits = $odao->getTabDataFromSql($query);
 
-            if (empty($tempTabLignesFraisForfait)) return null;
+            //TODO if (empty($tempTabFraisForfaits)) $this->tabFraisForfaits[]; return;
 
             foreach ($tempTabFraisForfaits as $fraisforfait) {
-                $this->tabEtats[] = new C_Etat(
+                $this->tabFraisForfaits[] = new C_Etat(
                     $fraisforfait['id'],
                     $fraisforfait['libelle'],
                     $fraisforfait['montant']
@@ -152,7 +152,7 @@ class C_FichesFrais{
             $query = "SELECT * FROM fichefrais;";
             $tempTabFichesFrais = $odao->getTabDataFromSql($query);
 
-            if (empty($tempTabLignesFraisForfait)) return null;
+            //TODO if (empty($tempTabFichesFrais)) $this->tabFichesFrais[]; return;
 
             $oVisitors = new C_Visitors();
             $oEtats = new C_Etats();
@@ -210,7 +210,7 @@ class C_LignesFraisForfait{
             $query = "SELECT * FROM lignefraisforfait;";
             $tempTabLignesFraisForfait = $odao->getTabDataFromSql($query);
     
-            if (empty($tempTabLignesFraisForfait)) return null;
+            //TODO if (empty($tempTabLignesFraisForfait)) { $this->tabLignesFraisForfait[]; return; }
 
             $oVisitors = new C_Visitors();
             $oFraisForfaits = new C_FraisForfaits();
@@ -272,13 +272,13 @@ class C_LignesFraisHorsForfait{
             $query = "SELECT * FROM lignefraishorsforfait;";
             $tempTabLignesFraisHorsForfait = $odao->getTabDataFromSql($query);
 
-            if (empty($tempTabLignesFraisHorsForfait)) return null;
+            //TODO if (empty($tempTabLignesFraisHorsForfait)){ $this->tabLignesFraisHorsForfait[]; return; }
 
             $oVisitors = new C_Visitors();
             $oEtats = new C_Etats();
 
             foreach ($tempTabLignesFraisHorsForfait as $ligneFraisHorsForfait) {
-                $this->tabFichesFrais[] = new C_FicheFrais(
+                $this->tabLignesFraisHorsForfait[] = new C_FicheFrais(
                     $ligneFraisHorsForfait['id'],
                     $oVisitors->GetVisitorById($ligneFraisHorsForfait['idVisiteur']),
                     $ligneFraisHorsForfait['mois'],
@@ -291,6 +291,26 @@ class C_LignesFraisHorsForfait{
         catch(PDOException $e){
             $msg = "ERREUR PDO dans ".$e->getFile()." Ligne ".$e->getLine()." : ".$e->getMessage();
             die($msg);
+        }
+    }
+
+    public function GetRowsLignesFraisHorsForfait(){
+        //TODO ici faire une vérifiation sur le mois en plus
+        if(empty($this->tabLignesFraisHorsForfait)){ 
+            return "Pas de frais hors forfait enregistrés";
+        }
+        else {
+            $rows = "";
+            foreach ($this->tabLignesFraisHorsForfait as $ligneFraisHorsForfait){
+                $rows .= "
+                <tr>
+                    <td>$ligneFraisHorsForfait->Libelle()</td>
+                    <td>$ligneFraisHorsForfait->Date()</td>
+                    <td>$ligneFraisHorsForfait->Montant()</td>
+                    <td>TODO: Add ACTION</td>
+                </tr>";
+            }
+            return $rows;
         }
     }
 }

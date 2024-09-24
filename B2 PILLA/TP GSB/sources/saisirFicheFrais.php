@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
+    //error_reporting(0);
     require_once 'include/head.php';
     require_once 'class/Employee.php';
+    require_once 'class/FicheFrais.php';
     require_once 'function/Functions.php';
     session_start();
     $oVisitor = $_SESSION['visitor'];
     CheckIfLogged($oVisitor);
-    //error_reporting(0);
+
+    $oLignesFraisHorsForfait = new C_LignesFraisHorsForfait();
+    
 
     /*$oFichesFrais = new C_FichesFrais();
     $oFichesFrais->CheckFicheFrais($oVisitors->id);
