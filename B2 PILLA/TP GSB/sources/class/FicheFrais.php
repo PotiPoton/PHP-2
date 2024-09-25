@@ -264,9 +264,11 @@ class C_LigneFraisHorsForfait{
 
 class C_LignesFraisHorsForfait{
     protected $tabLignesFraisHorsForfait;
+    protected $visitor;
 
     public function __construct($sVisitor){
 
+        $this->visitor = $sVisitor;
         try{
             $odao = new Cdao();
             $query = "SELECT * FROM lignefraishorsforfait WHERE idVisiteur='".$sVisitor->Id()."';";
@@ -301,13 +303,13 @@ class C_LignesFraisHorsForfait{
             $odao = new Cdao();
 
             $query = "INSERT INTO lignefraishorsforfait (`idVisiteur`, `mois`, `libelle`, `date`, `montant`) 
-                VALUES (".$this->tabLignesFraisHorsForfait->idVisiteur->Id().", $mois, $sLibelle, $date, $sMontant;";
+                VALUES ('".$this->visitor->Id()."', '$mois', '$sLibelle', '$date', $sMontant);";
             $odao->execute($query);
 
             $query = "SELECT MAX(id) FROM lignefraishorsforfait";
             $id = $odao->getTabDataFromSQL($query);
             $this->tabLignesFraisHorsForfait[] = new C_LignesFraisHorsForfait(
-                $id[0], $this->tabLignesFraisHorsForfait->idVisiteur->Id(), $mois, $sLibelle, $date, $sMontant);
+                $id[0], $this->visiteur, $mois, $sLibelle, $date, $sMontant);
         }
         catch(PDOException $e){
             $msg = "ERREUR PDO dans ".$e->getFile()." Ligne ".$e->getLine()." : ".$e->getMessage();
@@ -326,9 +328,9 @@ class C_LignesFraisHorsForfait{
             foreach ($this->tabLignesFraisHorsForfait as $ligneFraisHorsForfait){
                 $rows .= "
                 <tr>
-                    <td>$ligneFraisHorsForfait->Libelle()</td>
-                    <td>$ligneFraisHorsForfait->Date()</td>
-                    <td>$ligneFraisHorsForfait->Montant()</td>
+                    <td>".$ligneFraisHorsForfait->Libelle()."</td>
+                    <td>".$ligneFraisHorsForfait->Date()."</td>
+                    <td>".$ligneFraisHorsForfait->Montant()."</td>
                     <td>TODO: Add ACTION</td>
                 </tr>";
             }
@@ -337,12 +339,11 @@ class C_LignesFraisHorsForfait{
     }
 }
 
-$visitors = new C_Visitors();
-$visitor = $visitors->TabVisitors()[1];
-echo $visitor->Id();
+/*$visitors=new C_visitors();
+$visitor=$visitors->TabVisitors()[1];
 
-$test = new C_LignesFraisHorsForfait($visitor);
-echo $test->IdVisiteur()->Id();                         //* WATE ZE FEUK ?  */
-$test->AddLigneFraisHorsForfait("test1", 12);
+$lignesfhf = new C_LignesFraisHorsForfait($visitor);
+
+$lignesfhf->AddLigneFraisHorsForfait('test1', 1);*/
 
 ?>
