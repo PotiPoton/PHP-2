@@ -1,6 +1,7 @@
 <?php
 
 require_once 'Cdao.php';
+require_once 'DataBase.php';
 
 /*---------------------------------------------------------------------*/
 #                                                                       #
@@ -9,6 +10,7 @@ require_once 'Cdao.php';
 /*---------------------------------------------------------------------*/
 
 #region Employee
+
 abstract class C_Employee {
     protected $id;
     protected $nom;
@@ -102,7 +104,12 @@ class C_Visitors{
 
     public function __construct(){
         
-        try{
+        $db = new DataBase('gsb');
+        $this->tabVisitors = $db->GetObj('visitor');
+
+
+
+        /*try{
             $odao = new Cdao();
             $query = "SELECT * FROM visiteur;";
 
@@ -127,7 +134,7 @@ class C_Visitors{
         catch(PDOException $e){
             $msg = "ERREUR PDO dans ".$e->getFile()." Ligne ".$e->getLine()." : ".$e->getMessage();
             die($msg);
-        }
+        }*/
         
     }
 
