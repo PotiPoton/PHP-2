@@ -131,6 +131,12 @@ class C_Visitors{
         
     }
 
+    #region Getter/Setter 
+
+    public function TabVisitors() { return $this->tabVisitors; }
+
+    #endregion
+
     #region Private Methodes
 
     private function GetSaltByLogin($sLogin){

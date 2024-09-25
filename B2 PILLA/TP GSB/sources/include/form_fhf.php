@@ -4,7 +4,7 @@
             $inputLibFhf = htmlspecialchars($_POST['lib-fhf']);
             $inputMntFhf = htmlspecialchars($_POST['mnt-fhf']);
 
-            
+            $oLignesFraisHorsForfait->AddLigneFraisHorsForfait($inputLibFhf, $inputMntFhf);
         }
         else $errorMsg = "Il manque au moins une information";
     }

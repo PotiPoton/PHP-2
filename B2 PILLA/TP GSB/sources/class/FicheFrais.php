@@ -277,7 +277,7 @@ class C_LignesFraisHorsForfait{
             $oEtats = new C_Etats();
 
             foreach ($tempTabLignesFraisHorsForfait as $ligneFraisHorsForfait) {
-                $this->tabLignesFraisHorsForfait[] = new C_FicheFrais(
+                $this->tabLignesFraisHorsForfait[] = new C_LigneFraisHorsForfait(
                     $ligneFraisHorsForfait['id'],
                     $sVisitor,
                     $ligneFraisHorsForfait['mois'],
@@ -286,12 +286,35 @@ class C_LignesFraisHorsForfait{
                     $ligneFraisHorsForfait['montant']
                 );
             }
+            
         }
         catch(PDOException $e){
             $msg = "ERREUR PDO dans ".$e->getFile()." Ligne ".$e->getLine()." : ".$e->getMessage();
             die($msg);
         }
     }
+
+    public function AddLigneFraisHorsForfait($sLibelle, $sMontant){
+        try{
+            $mois = date('m');
+            $date = date('Y-m-d');
+            $odao = new Cdao();
+
+            $query = "INSERT INTO lignefraishorsforfait (`idVisiteur`, `mois`, `libelle`, `date`, `montant`) 
+                VALUES (".$this->tabLignesFraisHorsForfait->idVisiteur->Id().", $mois, $sLibelle, $date, $sMontant;";
+            $odao->execute($query);
+
+            $query = "SELECT MAX(id) FROM lignefraishorsforfait";
+            $id = $odao->getTabDataFromSQL($query);
+            $this->tabLignesFraisHorsForfait[] = new C_LignesFraisHorsForfait(
+                $id[0], $this->tabLignesFraisHorsForfait->idVisiteur->Id(), $mois, $sLibelle, $date, $sMontant);
+        }
+        catch(PDOException $e){
+            $msg = "ERREUR PDO dans ".$e->getFile()." Ligne ".$e->getLine()." : ".$e->getMessage();
+            die($msg);
+        }
+    }
+
 
     public function GetRowsLignesFraisHorsForfait(){
         //TODO ici faire une vérifiation sur le mois en plus
@@ -313,5 +336,13 @@ class C_LignesFraisHorsForfait{
         }
     }
 }
+
+$visitors = new C_Visitors();
+$visitor = $visitors->TabVisitors()[1];
+echo $visitor->Id();
+
+$test = new C_LignesFraisHorsForfait($visitor);
+echo $test->IdVisiteur()->Id();                         //* WATE ZE FEUK ?  */
+$test->AddLigneFraisHorsForfait("test1", 12);
 
 ?>
