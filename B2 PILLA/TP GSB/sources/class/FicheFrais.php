@@ -271,7 +271,7 @@ class C_LignesFraisHorsForfait{
         $this->visitor = $sVisitor;
         try{
             $odao = new Cdao();
-            $query = "SELECT * FROM lignefraishorsforfait WHERE idVisiteur='".$sVisitor->Id()."';";
+            $query = "SELECT * FROM lignefraishorsforfait WHERE idVisiteur='".$this->visitor->Id()."';";
             $tempTabLignesFraisHorsForfait = $odao->getTabDataFromSql($query);
 
             //TODO if (empty($tempTabLignesFraisHorsForfait)){ $this->tabLignesFraisHorsForfait[]; return; }
@@ -281,7 +281,7 @@ class C_LignesFraisHorsForfait{
             foreach ($tempTabLignesFraisHorsForfait as $ligneFraisHorsForfait) {
                 $this->tabLignesFraisHorsForfait[] = new C_LigneFraisHorsForfait(
                     $ligneFraisHorsForfait['id'],
-                    $sVisitor,
+                    $this->visitor,
                     $ligneFraisHorsForfait['mois'],
                     $ligneFraisHorsForfait['libelle'],
                     $ligneFraisHorsForfait['date'],
@@ -290,9 +290,8 @@ class C_LignesFraisHorsForfait{
             }
             
         }
-        catch(PDOException $e){
-            $msg = "ERREUR PDO dans ".$e->getFile()." Ligne ".$e->getLine()." : ".$e->getMessage();
-            die($msg);
+        catch(Exception $e){
+            echo "ERREUR : ".$e->getMessage();
         }
     }
 
@@ -309,7 +308,7 @@ class C_LignesFraisHorsForfait{
             $query = "SELECT MAX(id) FROM lignefraishorsforfait";
             $id = $odao->getTabDataFromSQL($query);
             $this->tabLignesFraisHorsForfait[] = new C_LignesFraisHorsForfait(
-                $id[0], $this->visiteur, $mois, $sLibelle, $date, $sMontant);
+                $id[0], $this->visitor, $mois, $sLibelle, $date, $sMontant);
         }
         catch(PDOException $e){
             $msg = "ERREUR PDO dans ".$e->getFile()." Ligne ".$e->getLine()." : ".$e->getMessage();
@@ -343,7 +342,6 @@ class C_LignesFraisHorsForfait{
 $visitor=$visitors->TabVisitors()[1];
 
 $lignesfhf = new C_LignesFraisHorsForfait($visitor);
-
-$lignesfhf->AddLigneFraisHorsForfait('test1', 1);*/
+$lignesfhf->AddLigneFraisHorsForfait('test2', 12.84);*/
 
 ?>
