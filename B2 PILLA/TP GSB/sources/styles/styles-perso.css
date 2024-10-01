@@ -68,7 +68,7 @@ a:hover{ text-decoration: none; color: #ffffff; }
     margin: 20px auto 0 auto;
     padding: 6px 3px;
     background: green; }
-.cnt > form > input[type="submit"].save { background: #003b57; }
+.cnt > form > input[type="submit"].save { background: #003b57; width: 30%;}
 
 /** Centrer sur toute la page */
 .cnt.center {

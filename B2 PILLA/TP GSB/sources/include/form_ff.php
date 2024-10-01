@@ -21,5 +21,6 @@
             <input type="number" name="ff-etape" id="ff-resto" step="1">
             <input type="text" placeholder="Ajouter Fonction php" readonly>
         </div>
+        <input class="save" type="submit" name="btn-ff" value="Enregistrer">
     </form>
 </div>
