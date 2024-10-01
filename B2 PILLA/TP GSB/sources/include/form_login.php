@@ -34,7 +34,7 @@
 
 ?>
 <div class="cnt center">
-    <div class="cnt form small nomgn">
+    <div class="cnt box small nomgn">
         <h2>Connexion</h2>
         <form action="" method="POST">
             <input type="text" name="inputLogin" placeholder="Login">
