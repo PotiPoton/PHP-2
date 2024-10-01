@@ -1,4 +1,4 @@
-<div class="cnt table">
+<div class="cnt box">
     <h2>Récapitulatif des frais hors forfait</h2>
     <h4>Mois : <?php echo $monthFr[date('F')]; ?></h4>
     <?php

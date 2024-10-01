@@ -1,6 +1,6 @@
 <?php
     if(isset($_POST['btn-fhf'])){
-        if(isset($_POST['lib-fhf']) && isset($_POST['mnt-fhf'])){
+        if(!empty($_POST['lib-fhf']) && !empty($_POST['mnt-fhf'])){
             $inputLibFhf = htmlspecialchars($_POST['lib-fhf']);
             $inputMntFhf = htmlspecialchars($_POST['mnt-fhf']);
             
@@ -11,7 +11,7 @@
     }
 ?>
 
-<div class="cnt form">
+<div class="cnt box">
     <h2>Saisie des frais hors forfait</h2>
     <form action="" method="POST">
         <input type="text" name="lib-fhf" placeholder="Entrer le libellé des frais">
