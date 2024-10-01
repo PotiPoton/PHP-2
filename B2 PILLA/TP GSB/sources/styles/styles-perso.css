@@ -86,6 +86,13 @@ a:hover{ text-decoration: none; color: #ffffff; }
     bottom: 20px;
     max-width: 100%; }
 
+/** Rows */
+.row { display: flex; justify-content: flex-start; align-items: center; margin-bottom: 10px; }
+
+.row label { width: 150px; text-align: left; margin-left: 25px; min-width: fit-content; }
+.row input { width: 320px; }
+.row input:last-child {margin-right: 25px; }
+
 /** Générique quand navbar */
 .cnt.content {
     position: relative;

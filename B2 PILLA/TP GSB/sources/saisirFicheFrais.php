@@ -20,15 +20,18 @@
 <body>
     <?php require_once 'include/navbar.php'; ?>
     <div class="cnt content">
-        <?php require_once 'include/form_fhf.php'; ?>
-        <?php require_once 'include/show_fhf.php';?>
+        <?php
+        require_once 'include/form_ff.php';
+        require_once 'include/form_fhf.php';
+        require_once 'include/show_fhf.php';
+        ?>
     </div>
     
     
     
         <?
             /*
-            require_once 'include/form_ff.php';
+            
             require 'include/error-handling.php';
             
             
