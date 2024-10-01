@@ -18,8 +18,13 @@ class C_Etat{
         $this->libelle = $libelle;
     }
 
+    #region Getters Setters
+
     public function Id() { return $this->id; }
     public function Libelle() { return $this->libelle; }
+
+    #endregion
+
 }
 
 class C_Etats {
@@ -72,9 +77,14 @@ class C_FraisForfait{
         $this->montant = $montant;
     }
 
+    #region Getters Setters
+
     public function Id() { return $this->id; }
     public function Libelle() { return $this->libelle; }
     public function Montant() { return $this->montant; }
+
+    #endregion
+
 }
 
 class C_FraisForfaits {
@@ -134,12 +144,17 @@ class C_FicheFrais{
         $this->idEtat = $idEtat;
     }
 
+    #region Getters Setters
+
     public function IdVisiteur() { return $this->idVisiteur; }
     public function Mois() { return $this->mois; }
     public function NbJustificatifs() { return $this->nbJustificatifs; }
     public function MontantValide() { return $this->montantValide; }
     public function DateModif() { return $this->dateModif; }
     public function IdEtat() { return $this->idEtat; }
+
+    #endregion
+
 }
 
 class C_FichesFrais{
@@ -182,29 +197,39 @@ class C_FichesFrais{
 /*---------------------------------------------------------------------*/
 
 class C_LigneFraisForfait{
+    protected $id;
     protected $idVisiteur;
     protected $mois;
     protected $idFraisForfait;
     protected $quantite;
 
-    public function __construct($idVisiteur, $mois, $idFraisForfait, $quantite){
+    public function __construct($id, $idVisiteur, $mois, $idFraisForfait, $quantite){
+        $this->id = $id;
         $this->idVisiteur = $idVisiteur;
         $this->mois = $mois;
         $this->idFraisForfait = $idFraisForfait;
         $this->quantite = $quantite; 
     }
 
+    #region Getters Setters
+
+    public function Id() { return $this->id; }
     public function IdVisiteur() { return $this->idVisiteur; }
     public function Mois() { return $this->mois; }
     public function IdFraisForfait() { return $this->idFraisForfait; }
     public function Quantite() { return $this->quantite; }
+
+    #endregion
+
 }
 
 class C_LignesFraisForfait{
     protected $tabLignesFraisForfait;
+    protected $visitor;
 
-    public function __construct(){
+    public function __construct($sVisitor){
 
+        $this->visitor = $sVisitor;
         try{
             $odao = new Cdao();
             $query = "SELECT * FROM lignefraisforfait;";
@@ -212,21 +237,20 @@ class C_LignesFraisForfait{
     
             //TODO if (empty($tempTabLignesFraisForfait)) { $this->tabLignesFraisForfait[]; return; }
 
-            $oVisitors = new C_Visitors();
             $oFraisForfaits = new C_FraisForfaits();
 
             foreach ($tempTabLignesFraisForfait as $ligneFraisForfait) {
                 $this->$tabLignesFraisForfait[] = new C_LigneFraisForfait(
-                    $oVisitors->GetVisitorById($ligneFraisForfait['idVisiteur']),
+                    $ligneFraisForfait['id'],
+                    $this->visitor,
                     $ligneFraisForfait['mois'],
                     $oFraisForfaits->GetFraisForfaitById($ligneFraisForfait['idFraisForfait']),
                     $ligneFraisForfait['quantite']
                 );
             }
         }
-        catch(PDOException $e){
-            $msg = "ERREUR PDO dans ".$e->getFile()." Ligne ".$e->getLine()." : ".$e->getMessage();
-            die($msg);
+        catch(Exception $e){
+            echo "ERREUR : ".$e->getMessage();
         }
     }
 }
@@ -254,12 +278,16 @@ class C_LigneFraisHorsForfait{
         $this->montant = $montant;
     }
 
+    #region Getters Setters
+
     public function Id() { return $this->id; }
     public function IdVisiteur() { return $this->idVisiteur; }
     public function Mois() { return $this->mois; }
     public function Libelle() { return $this->libelle; }
     public function Date() { return $this->date; }
     public function Montant() { return $this->montant; }
+
+    #endregion
 }
 
 class C_LignesFraisHorsForfait{
@@ -294,6 +322,8 @@ class C_LignesFraisHorsForfait{
             echo "ERREUR : ".$e->getMessage();
         }
     }
+
+    #region Méthodes Publiques
 
     public function AddLigneFraisHorsForfait($sLibelle, $sMontant){
         try{
@@ -336,6 +366,9 @@ class C_LignesFraisHorsForfait{
             return $rows;
         }
     }
+
+    #endregion
+
 }
 
 /*$visitors=new C_visitors();
