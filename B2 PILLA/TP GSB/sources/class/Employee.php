@@ -34,7 +34,8 @@ abstract class C_Employee {
         $this->dateEmbauche = $dateEmbauche;
     }
 
-    //* Accesseurs
+    #region Getters Setters
+
     public function Id() { return $this->id; }
     public function Nom() { return $this->nom; }
     public function Prenom() { return $this->prenom; }
@@ -42,6 +43,8 @@ abstract class C_Employee {
     public function HashMdp() { return $this->hashMdp; }
     public function Salt() { return $this->salt; }
     
+    #endregion
+
     protected abstract function AddHashPwd($sHashPwd, $sId);
     
     protected abstract function AddSalt($sSalt, $sId);
@@ -62,6 +65,10 @@ class C_Visitor extends C_Employee{
         parent::__construct($id, $nom, $prenom, $login, $hashMdp, $salt, $adresse, $cp, $ville, $dateEmbauche);
     }
 
+    public function Id() { return $this->id; }
+
+    #region Classes Internes
+    
     protected function AddHashPwd($sHashPwd, $sId){
         if(!empty($sHashPwd)) return $sHashPwd;
         
@@ -95,6 +102,9 @@ class C_Visitor extends C_Employee{
 
         return $salt; 
     }
+
+    #endregion
+
 }
 
 class C_Visitors{

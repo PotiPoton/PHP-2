@@ -307,7 +307,7 @@ class C_LignesFraisHorsForfait{
 
             $query = "SELECT MAX(id) FROM lignefraishorsforfait";
             $id = $odao->getTabDataFromSQL($query);
-            $this->tabLignesFraisHorsForfait[] = new C_LignesFraisHorsForfait(
+            $this->tabLignesFraisHorsForfait[] = new C_LigneFraisHorsForfait(
                 $id[0], $this->visitor, $mois, $sLibelle, $date, $sMontant);
         }
         catch(PDOException $e){
