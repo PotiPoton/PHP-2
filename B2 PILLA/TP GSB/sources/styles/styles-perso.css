@@ -10,6 +10,7 @@ form { width: 100%; max-height: calc(100vh - 118px); max-height: 80vh;
 input {display: block; width: 80%; min-width: fit-content; margin: 7px auto; padding: 2px 15px; 
     border-radius: 10px; border-style: none; border: none; background: #f4f4f4;}
 input[type="submit"]{ padding: 6px 3px; font-weight: 600; color: #fff; }
+input[type="submit"]:hover { cursor: pointer; }
 
 /** Tables */
 table { margin: 4px auto; padding: 12px;width: 95%; border-collapse: separate; border-spacing: 0; } 
@@ -39,6 +40,8 @@ a:hover{ text-decoration: none; color: #ffffff; }
 #navbar > h1, h3, a { margin: 25px 15px; display: block; }
 #navbar > #active{ font-weight: bolder; color: #fff }
 #navbar > .cnt.bottom > form > input[type="submit"] { background: #a11616; }
+#navbar > .cnt.bottom > form > input[type="submit"]:hover { background: #c42d2d; }
+
 
 /** Container */
 .cnt { margin: 0 auto 25px auto; padding: 0; width: 1000px; max-width: 95%; border-radius: 8px; }
@@ -68,7 +71,10 @@ a:hover{ text-decoration: none; color: #ffffff; }
     margin: 20px auto 0 auto;
     padding: 6px 3px;
     background: green; }
+.cnt > form > input[type="submit"]:hover { background: rgb(29, 185, 29); }
 .cnt > form > input[type="submit"].save { background: #003b57; width: 30%;}
+.cnt > form > input[type="submit"].save:hover { background: #0d5f84;}
+
 
 /** Centrer sur toute la page */
 .cnt.center {
