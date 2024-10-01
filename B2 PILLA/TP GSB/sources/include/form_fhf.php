@@ -18,4 +18,5 @@
         <input type="number" name="mnt-fhf" placeholder="Entrer le montant des frais" step="0.01">
         <input class="save" type="submit" name="btn-fhf" value="Enregistrer">
     </form>
+    <?php require_once "error-handling.php"; ?>
 </div>
