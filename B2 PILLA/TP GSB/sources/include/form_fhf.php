@@ -5,7 +5,8 @@
             $inputMntFhf = htmlspecialchars($_POST['mnt-fhf']);
             
             $oLignesFraisHorsForfait->AddLigneFraisHorsForfait($inputLibFhf, $inputMntFhf);
-            // header('Refresh');
+            header('Location: saisirFicheFrais.php');
+            exit();
         }
         else $errorMsg = "Il manque au moins une information";
     }

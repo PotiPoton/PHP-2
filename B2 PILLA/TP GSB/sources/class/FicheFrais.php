@@ -97,28 +97,26 @@ class C_FraisForfaits {
             $query = "SELECT * FROM fraisforfait;";
             $tempTabFraisForfaits = $odao->getTabDataFromSql($query);
 
-            //TODO if (empty($tempTabFraisForfaits)) $this->tabFraisForfaits[]; return;
-
             foreach ($tempTabFraisForfaits as $fraisforfait) {
-                $this->tabFraisForfaits[] = new C_Etat(
+                $this->tabFraisForfaits[] = new C_FraisForfait(
                     $fraisforfait['id'],
                     $fraisforfait['libelle'],
                     $fraisforfait['montant']
                 );
             }
         }
-        catch(PDOException $e){
-            $msg = "ERREUR PDO dans ".$e->getFile()." Ligne ".$e->getLine()." : ".$e->getMessage();
-            die($msg);
+        catch(Exception $e){
+            echo "ERREUR : ".$e->getMessage();
         }
     }
 
     public function GetFraisForfaitById($sId){
-        foreach ($this->$tabFraisForfaits as $fraisForfait){
-            if($fraisforfait->Id() == $sId) return $fraisForfait;
+        foreach ($this->tabFraisForfaits as $fraisforfait){
+            if($fraisforfait->Id() == $sId) return $fraisforfait;
         }
         return null;
     }
+
 }
 
 /*---------------------------------------------------------------------*/
@@ -183,11 +181,11 @@ class C_FichesFrais{
                 );
             }
         }
-        catch(PDOException $e){
-            $msg = "ERREUR PDO dans ".$e->getFile()." Ligne ".$e->getLine()." : ".$e->getMessage();
-            die($msg);
+        catch(Exception $e){
+            echo "ERREUR : ".$e->getMessage();
         }
     }
+
 }
 
 /*---------------------------------------------------------------------*/
@@ -371,7 +369,10 @@ class C_LignesFraisHorsForfait{
 
 }
 
-/*$visitors=new C_visitors();
+/*$oFraisForfaits = new C_FraisForfaits();
+$oFraisForfaits->GetFraisForfaitById('ETP');
+
+$visitors=new C_visitors();
 $visitor=$visitors->TabVisitors()[1];
 
 $lignesfhf = new C_LignesFraisHorsForfait($visitor);
