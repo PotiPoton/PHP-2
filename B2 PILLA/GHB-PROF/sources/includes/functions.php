@@ -50,7 +50,7 @@ function getAnneeMois()
  }*/
     
 function VerificationFF($sValue){
-    if (!ctype_digit($sValue)) return "Pas d'espaces, de lettres ni de nombres inférieurs à 0";
+    if (!ctype_digit($sValue)) throw new Exception("Pas d'espace, de lettre ni de nombre inferieur à 0");
     return true;
 }
 

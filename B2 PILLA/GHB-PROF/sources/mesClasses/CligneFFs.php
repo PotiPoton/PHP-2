@@ -108,4 +108,18 @@ class CligneFFs
          $odao->update($query);
          unset($odao);
     }
+
+    public function updateLignesFF($stab){
+        $odao = new Cdao();
+        $oVisiteur = unserialize($_SESSION['visiteur']);
+        $mois = getAnneeMois();
+
+        foreach ($stab as $id=>$montant){
+            $query[] = "update lignefraisforfait set quantite=".$montant.
+            " where mois='".$mois."'"." and idVisiteur='".$oVisiteur->id."'"." and idFraisForfait='".$id."'";
+        }
+
+        $odao->updateTransac($query);
+        undset($odao);
+    }
 }

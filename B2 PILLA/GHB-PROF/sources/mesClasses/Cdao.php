@@ -71,21 +71,21 @@ class Cdao  //classe outil
     
     public function insertion($squery) //fera une insertion dans la base en fonction de la requete recue en parametre
     {
-             $lepdo = $this->getObjetPDO();
-   
-             $sth = $lepdo->prepare($squery);
-             $sth->execute();
-             unset($lepdo);            
+        $lepdo = $this->getObjetPDO();
+
+        $sth = $lepdo->prepare($squery);
+        $sth->execute();
+        unset($lepdo);            
        
     }
     
     public function update($squery) //fera une mise à jour dans la base en fonction de la requete recue en parametre
     {
-             $lepdo = $this->getObjetPDO();
-   
-             $sth = $lepdo->prepare($squery);
-             $sth->execute();
-             unset($lepdo);            
+        $lepdo = $this->getObjetPDO();
+
+        $sth = $lepdo->prepare($squery);
+        $sth->execute();
+        unset($lepdo);            
        
     }
 
@@ -97,6 +97,25 @@ class Cdao  //classe outil
        $sth->execute();
        unset($lepdo); 
         
+    }
+
+    public function updateTransac($tabQuery){
+        
+        try {
+            $pdo = $this->getObjetPDO();
+
+            $pdo->beginTransaction();
+
+            foreach ($tabQuery as $query) {
+                $sth = $pdo->prepare($query);
+                $sth->execute();
+            }
+
+            $pdo->commit();
+        } catch (PDOException $e) {
+            if ($pdo->inTransaction()) { $pdo->rollBack(); }
+            throw new Exception("Erreur lors de l'update | Message d'origine : ".$e->getMessage());
+        }
     }
     
 

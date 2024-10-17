@@ -15,28 +15,23 @@ $ofraisForfaits = new CfraisForfaits(); // variable globale car utilisée dans l
 $ocollFraisForfait = $ofraisForfaits->getCollFraisForfait();
 if(isset($_POST['btnFF']))
 {
-
-  $arrayMontant = [];
-
+  try {
     foreach ($ocollFraisForfait as $ofraisForfait)
     {
         $montant = filter_input(INPUT_POST, $ofraisForfait->id, FILTER_SANITIZE_STRING) ;
         $check = VerificationFF($montant);
-        if ($check === true) $arrayMontant[$ofraisForfait->id] = $montant; 
-        else {
-          $_SESSION['errorMSG_FF'] = $check;
-          $_SESSION['successMSG_FF'] = null;
-          break;
-        }
+        $arrayMontant[$ofraisForfait->id] = $montant; 
     }
+    $oLigneFFs->updateLignesFF($arrayMontant);
 
-    if (count($arrayMontant) == 4){
-      foreach ($arrayMontant as $id=> $montant){
-        $oLigneFFs->updateLigneFF($montant, $id); // param1 => montant param2 => id du frais par ex ETP
-      }
-      $_SESSION['successMSG_FF'] = "Modification des quantités effectuée !";
-      $_SESSION['errorMSG_FF'] = null;
-    }
+    $_SESSION['successMSG_FF'] = "Modification des quantités effectuée !";
+    $_SESSION['errorMSG_FF'] = null;
+
+  }catch (Exception $e) {
+    $_SESSION['successMSG_FF'] = null;
+    $_SESSION['errorMSG_FF'] = $e->getMessage;
+  }
+    
 
 
  
